@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EmailApp.Controllers
 {
-    public class LoginController(UserManager<AppUser> _userManager ,                                                                           SignInManager<AppUser> _signInManager): Controller
+    public class LoginController(UserManager<AppUser> _userManager ,SignInManager<AppUser> _signInManager): Controller
     {
         [HttpGet]
         public IActionResult Index()
@@ -31,7 +31,13 @@ namespace EmailApp.Controllers
                 return View(model);
 
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index","Message");
         }
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index","Login");
+        }
+      
     }
 }

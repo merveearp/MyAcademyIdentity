@@ -1,0 +1,88 @@
+﻿
+@*
+    _LayoutSideBarComponent
+*@
+
+                <div class="col-md-3">
+                 <a asp-controller ="Message" asp-action="SendMessage" class="btn btn-primary btn-block mb-3">Yeni Mail Gönder</a>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Mesaj Kutusu</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item active">
+                                         <a asp-controller="Message" asp-action="Index" class="nav-link">
+                                             <i class="fas fa-inbox text-primary"></i> Gelen Mesajlar
+                                            <span class="badge bg-primary float-right">@ViewBag.UnReadMessage</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="Message" asp-action="SendedMessages" class="nav-link">
+                                            <i class="fas fa-paper-plane text-info"></i> Gönderilen Mesajlar
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link" asp-controller="Message" asp-action="ReadMessage" asp-route-isRead="true">
+                                            <i class="fas fa-envelope-open text-success"></i> Okunmuş Mesajlar
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Message" asp-action="ReadMessage" asp-route-isRead="false">
+                                            <i class="far fa-envelope text-warning"></i> Okunmamış Mesajlar
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a asp-controller="Message" asp-action="MoveToDraft" class="nav-link">
+                                            <i class="far fa-file-alt text-primary" ></i> Taslaklar
+                                        </a>
+                                    </li>
+                                   
+                                    <li class="nav-item">
+                                        <a asp-controller="Message" asp-action="MoveToTrash" class="nav-link">
+                                            <i class="far fa-trash-alt text-dark"></i> Çöp Kutusu
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Başlıklar</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item">
+                                   <a asp-controller="Message" asp-action="IsFlag" class="nav-link">
+                                            <i class="far fa-flag text-danger"></i>
+                                            Bayraklı Mesajlar
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="Message" asp-action="Starred" class="nav-link">
+                                            <i class="far fa-star text-warning"></i> Yıldızlı Mesajlar
+                                        </a>
+                                    </li>
+                                  
+                                </ul>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+

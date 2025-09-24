@@ -1,0 +1,79 @@
+﻿@model List<Message>
+@{
+    var me = Model.FirstOrDefault()?.Receiver; 
+}
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+   
+    <!-- SEARCH FORM -->
+    <form class="form-inline ml-3">
+        <div class="input-group input-group-sm">
+            <input class="form-control form-control-navbar" type="search" placeholder="Ara..." aria-label="Ara..">
+            <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <ul class="navbar-nav ml-auto">
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+            
+      
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-comments"></i>
+                <span class="badge badge-danger navbar-badge">@Model.Count</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">                
+                <div class="dropdown-divider"></div>
+                @foreach (var item in Model)
+                {
+                <a href="/Message/MessageDetail/@item.MessageId" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="@item.Sender.ImageUrl" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                               @item.Sender.FirstName @item.Sender.LastName
+                               
+                            </h3> 
+                                <p class="text-sm text-danger">@item.Subject</p>
+                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>@item.SendDate.ToShortDateString()</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                    }
+                <div class="dropdown-divider"></div>
+                <a href="/Message/Index" class="dropdown-item dropdown-footer">Bütün Mesajları Gör</a>
+                  
+                </div>
+       
+        
+        </li>
+        <!-- Notifications Dropdown Menu -->
+        
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link" data-toggle="dropdown"><i class="fas fa-th-large"></i></a>
+
+            <div class="dropdown-menu dropdown-menu-right p-3 text-center" style="min-width:220px;">
+                <img src="@me.ImageUrl" alt="@me.FirstName @me.LastName"
+                     class="img-circle mb-2" style="width:64px;height:64px;object-fit:cover;">
+                <div class="font-weight-bold mb-2">@me.FirstName @me.LastName</div>
+
+                <form method="post" action="/Login/Logout">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                        <i class="fas fa-sign-out-alt mr-1"></i> Çıkış Yap
+                    </button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</nav>
+<!-- /.navbar -->
+

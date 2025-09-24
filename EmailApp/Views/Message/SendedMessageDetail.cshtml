@@ -1,0 +1,61 @@
+﻿@model Message
+@{
+    ViewData["Title"] = "Gönderilen Mesaj Detayı";
+    Layout = "~/Views/MainLayout/Layout.cshtml";
+}
+
+<div class="col-md-9">
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h3 class="text-primary">Mail İçeriği</h3>
+
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+            <div class="mailbox-read-info">
+                <div>
+                    <h5 class="text-danger">Konu: @Model.Subject<h5>
+
+                </div>
+
+                <h6>
+                    Alıcı :
+                    @Model.Receiver.Email
+                    <span class="mailbox-rearyad-time float-right">@Model.SendDate</span>
+                </h6>
+            </div>
+            <!-- /.mailbox-read-info -->
+            <!-- /.mailbox-controls -->
+            <div class="mailbox-read-message">
+
+                <p>
+                    @Model.Body
+                </p>
+
+            </div>
+            <!-- /.mailbox-read-message -->
+        </div>
+        <!-- /.card-body -->
+        <!-- /.card-footer -->
+        <div class="card-footer d-flex justify-content-end gap-2">
+            <a href="/Message/Index" class="btn btn-warning d-inline-flex ms-2">
+                <i class="ti ti-arrow-back-up me-1"></i> Geri Dön
+            </a>
+
+           
+            <form asp-controller="Message" asp-action="MoveToDraft" method="post" class="d-inline">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="messageId" value="@Model.MessageId" />
+                <button type="submit" class="btn btn-danger">
+                    <i class="far fa-file-alt"></i>Taslak Kutusuna Gönder
+                </button>
+            </form>
+        </div>
+
+        <div>
+        </div>
+        <!-- /.card-footer -->
+    </div>
+    <!-- /.card -->
+</div>
+
