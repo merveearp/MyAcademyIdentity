@@ -11,16 +11,17 @@ namespace EmailApp.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            ViewBag.Me = user;
 
-            // Son 3 okunmamış mesajı getir
+            // Son 5 okunmamış mesajı getir
             var messages = await _context.Messages
                 .Include(x => x.Sender)
                 .Include(x => x.Receiver)
                 .Where(x => x.ReceiverId == user.Id && !x.IsRead)
                 .OrderByDescending(x => x.SendDate)
                 .Take(5)
-                .ToListAsync();           
-            return View(messages);
+                .ToListAsync();
+            return View(messages ?? new List<Message>());
         }
     }
 }

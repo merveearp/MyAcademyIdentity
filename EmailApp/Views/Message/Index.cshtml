@@ -30,10 +30,7 @@
         <div class="card-body p-0">
             <div class="mailbox-controls">
                 <!-- Check all button -->
-                
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>                                    
-                </div>
+               
                 <!-- /.btn-group -->
                 <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
                 <div class="float-right">
@@ -49,47 +46,57 @@
             <div class="table-responsive mailbox-messages">
                 <table class="table table-hover table-striped">
                     <tbody>
-                        @foreach(var item in Model)
+                        @if (Model != null && Model.Any())
                         {
-                            count++;
-                            <tr>
-                            <td>
-                               @count
-                            </td>
-                                <td class="text-center align-middle">
-                                    <span class="badge @(item.IsRead ? "badge-success" : "badge-danger")">
-                                        @(item.IsRead ? "Okundu" : "Okunmadı")
-                                    </span>
-                                </td>
-
-                                <td class="text-center align-middle">
-                                    <form method="post" action="/Message/ToggleStar" class="d-inline">
-                                        <input type="hidden" name="id" value="@item.MessageId" />
-                                        <input type="hidden" name="redirect" value="@back" />
-                                        <button type="submit" class="btn btn-link p-0" title="Yıldız Aç/Kapa">
-                                            <i class="@(item.IsStarred ? "fas fa-star text-warning" : "far fa-star text-muted")"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            <td class="mailbox-name"><a href="/Message/MessageDetail/@item.MessageId">@item.Sender.FirstName @item.Sender.LastName</a></td>
-                            <td class="mailbox-subject">
-                                <b>@item.Subject</b>
-                            </td>
-                            <td class="mailbox-attachment"></td>
-                                <td class="mailbox-flag">
-                                    <form method="post" action="/Message/ToggleFlag" class="d-inline">
-                                        <input type="hidden" name="id" value="@item.MessageId" />
-                                        <input type="hidden" name="redirect" value="@back" />
-                                        <button type="submit" class="btn btn-link p-0" title="Bayrak Aç/Kapa">
-                                            <i class="@(item.IsFlag ? "fas fa-flag text-danger" : "far fa-flag text-muted")"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            <td class="mailbox-date">@item.SendDate.ToShortDateString()</td>
-                        </tr>
+                            foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <td>@count</td>
+                                    <td class="text-center align-middle">
+                                        <span class="badge @(item.IsRead ? "badge-success" : "badge-danger")">
+                                            @(item.IsRead ? "Okundu" : "Okunmadı")
+                                        </span>
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <form method="post" action="/Message/ToggleStar" class="d-inline">
+                                            <input type="hidden" name="id" value="@item.MessageId" />
+                                            <input type="hidden" name="redirect" value="@back" />
+                                            <button type="submit" class="btn btn-link p-0" title="Yıldız Aç/Kapa">
+                                                <i class="@(item.IsStarred ? "fas fa-star text-warning" : "far fa-star text-muted")"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td class="mailbox-name">
+                                        <a href="/Message/MessageDetail/@item.MessageId">@item.Sender.FirstName @item.Sender.LastName</a>
+                                    </td>
+                                    <td class="mailbox-subject">
+                                        <b>@item.Subject</b>
+                                    </td>
+                                    <td class="mailbox-attachment"></td>
+                                    <td class="mailbox-flag">
+                                        <form method="post" action="/Message/ToggleFlag" class="d-inline">
+                                            <input type="hidden" name="id" value="@item.MessageId" />
+                                            <input type="hidden" name="redirect" value="@back" />
+                                            <button type="submit" class="btn btn-link p-0" title="Bayrak Aç/Kapa">
+                                                <i class="@(item.IsFlag ? "fas fa-flag text-danger" : "far fa-flag text-muted")"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td class="mailbox-date">@item.SendDate.ToShortDateString()</td>
+                                </tr>
+                            }
                         }
-                                             
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center text-muted p-4">
+                                    📭 Henüz hiç mesajınız yok.
+                                </td>
+                            </tr>
+                        }
                     </tbody>
+
                 </table>
                 <!-- /.table -->
             </div>

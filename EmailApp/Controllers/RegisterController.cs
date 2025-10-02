@@ -2,6 +2,7 @@
 using EmailApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EmailApp.Controllers
@@ -22,7 +23,8 @@ namespace EmailApp.Controllers
                 Email=model.Email,
                 FirstName=model.FirstName,
                 LastName=model.LastName,
-                UserName=model.UserName
+                UserName=model.UserName,
+                ImageUrl = "~/AdminLTE-3.0.4/dist/img/defaultuser.png"
             };
             var result =await _userManager.CreateAsync(user,model.Password);
             if(!result.Succeeded)
