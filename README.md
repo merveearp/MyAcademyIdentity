@@ -137,6 +137,7 @@ public class Message
 * Okunmuş/okunmamış için **badge** ve **ikon** farkı kullanılabilir.
 
 ## 📸 Ekran Görüntüleri
+![12](https://github.com/user-attachments/assets/de927691-c34d-45c9-9fab-3d8c772e25b7)
 ![8](https://github.com/user-attachments/assets/15c40bad-32dc-44aa-a6d3-7f4d817d6e1e)
 ![7](https://github.com/user-attachments/assets/18402606-48e1-4d5e-8a3a-f0d5f3d5ccb7)
 ![6](https://github.com/user-attachments/assets/dadfddbe-483e-43d4-9c9c-da8869ab93f4)
